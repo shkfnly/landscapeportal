@@ -66,9 +66,3 @@ class SitesTest(TestCase):
         Test that a layer created in a normal site belongs to that site and to the master site only
         """
         pass
-
-    def test_(self):
-        """
-        Test the creation of new sites
-        """
-        pass
