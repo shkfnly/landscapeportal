@@ -1,3 +1,5 @@
+from tastypie.api import Api
+
 from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
 from .models import SiteResources
 
@@ -41,7 +43,7 @@ class CommonSiteModelApi(CommonModelApi):
         # Filter by site
         resources_for_site = SiteResources().object.get(site__id=get_current_site(request).id).resources.all()
         filtered = filtered.filter(id__in=resources)
-        
+
         return filtered
 
 
@@ -92,3 +94,11 @@ class DocumentResource(CommonSiteModelApi):
         if settings.RESOURCE_PUBLISHING:
             queryset = queryset.filter(is_published=True)
         resource_name = 'documents'
+
+
+api = Api(api_name='api')
+
+api.register(LayerResource())
+api.register(MapResource())
+api.register(DocumentResource())
+api.register(ResourceBaseResource())
