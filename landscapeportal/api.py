@@ -10,39 +10,11 @@ class CommonSiteModelApi(CommonModelApi):
     """Override the apply_filters method to respect the site"""
 
     def apply_filters(self, request, applicable_filters):
-        types = applicable_filters.pop('type', None)
-        extent = applicable_filters.pop('extent', None)
-        semi_filtered = super(
-            CommonModelApi,
-            self).apply_filters(
-            request,
-            applicable_filters)
-        filtered = None
-        if types:
-            for the_type in types:
-                if the_type in LAYER_SUBTYPES.keys():
-                    if filtered:
-                        filtered = filtered | semi_filtered.filter(
-                            Layer___storeType=LAYER_SUBTYPES[the_type])
-                    else:
-                        filtered = semi_filtered.filter(
-                            Layer___storeType=LAYER_SUBTYPES[the_type])
-                else:
-                    if filtered:
-                        filtered = filtered | semi_filtered.instance_of(
-                            FILTER_TYPES[the_type])
-                    else:
-                        filtered = semi_filtered.instance_of(
-                            FILTER_TYPES[the_type])
-        else:
-            filtered = semi_filtered
+        filtered = super(CommonSiteModelApi, self).apply_filters(request, applicable_filters)
 
-        if extent:
-            filtered = self.filter_bbox(filtered, extent)
-
-        # Filter by site
+        # Filter by site - although this 
         resources_for_site = SiteResources().object.get(site__id=get_current_site(request).id).resources.all()
-        filtered = filtered.filter(id__in=resources)
+        filtered = filtered.filter(id__in=resources_for_site)
 
         return filtered
 
