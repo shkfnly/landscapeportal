@@ -1,6 +1,6 @@
 import json
 
-from tastypie.test import ResourceTestCase
+from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import get_current_site
 from django.contrib.sites.models import Site
@@ -19,7 +19,7 @@ from .utils import resolve_object
 from .models import SiteResources
 
 
-class SitesTest(ResourceTestCase):
+class SitesTest(TestCase):
 
     """Tests the sites functionality
     """
@@ -45,6 +45,8 @@ class SitesTest(ResourceTestCase):
         self.slave_site = Site.objects.get(name='SlaveSite')
         self.slave2_data = {'name': 'Slave2Site',
                             'domain': 'slave2.test.org'}
+        # all layers belong to slave bu let's remove one resource from it
+        SiteResources.object.get(name='SlaveSite').resources.remove(Layer.objects.all()[0])
 
     def test_create_new_site(self):
         """
@@ -104,31 +106,33 @@ class SitesTest(ResourceTestCase):
         """
         Test that the master site owns all the layers available in the database
         """
-        self.assertEqual(SiteResources.objects.filter(site=self.master_site).resources.count(), 20)
+        self.assertEqual(SiteResources.objects.filter(site=self.master_site).resources.count(), 8)
 
     def test_admin_normal_site_subset_layers(self):
         """
         Test that a superuser that can see al layers on the master site,
         on normal site can see to the correct subset of layers
         """
-        self.assertEqual(SiteResources.objects.filter(site=self.slave_site).resources.count(), 10)
+        self.assertEqual(SiteResources.objects.filter(site=self.slave_site).resources.count(), 7)
 
     def test_non_superuser_normal_site_subset_layers(self):
         """
         Test that a non superuser, that can see different layers on different sites,
         can see the correct subset of layer on a normal site
         """
+        for layer in layer.objects.all()[:3]:
+            layer.remove_perm('view_resourcebase', layer.get_self_resource())
         # Set the domain so tat get_current_site picks the right one
         c = Client(SERVER_NAME='slave.test.org')
         c.login(username='bobby', password='bob')
         response = c.get(self.api_layer_url)
-        self.assertEquals(len(self.deserialize(resp)['objects']), 5)
+        self.assertEquals(len(json.loads(resp)['objects']), 5)
 
         # now test with superuser
         c.logout()
         c.login(username=self.user, password=self.password)
         response = c.get(self.api_layer_url)
-        self.assertEquals(len(self.deserialize(resp)['objects']), 10)
+        self.assertEquals(len(json.loads(resp)['objects']), 8)
 
     def test_layer_created_belongs_correct_site(self):
         """
@@ -138,4 +142,4 @@ class SitesTest(ResourceTestCase):
         # Create a Slave2 Site
         slave2 = Site.objects.create(name='Slave2Site', domani="slave2.test.org")
         self.assertEqual(SiteResources.object.get(site=slave2).resources.count(), 0)
-        
+
