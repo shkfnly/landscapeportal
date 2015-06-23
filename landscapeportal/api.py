@@ -1,4 +1,8 @@
+from django.contrib.sites.models import Site
+
 from tastypie.api import Api
+from tastypie.constants import ALL, ALL_WITH_RELATIONS
+from tastypie.resources import ModelResource
 
 from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
 from .models import SiteResources
@@ -68,9 +72,21 @@ class DocumentResource(CommonSiteModelApi):
         resource_name = 'documents'
 
 
+class SiteResource(ModelResource):
+    """Sites API"""
+
+    class Meta:
+        queryset = Site.objects.all()
+        filtering = {
+            'name': ALL
+        }
+        resource_name = 'sites'
+
+
 api = Api(api_name='api')
 
 api.register(LayerResource())
 api.register(MapResource())
 api.register(DocumentResource())
 api.register(ResourceBaseResource())
+api.register(SiteResource())
