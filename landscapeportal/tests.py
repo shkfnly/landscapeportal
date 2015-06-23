@@ -75,7 +75,7 @@ class SitesTest(ResourceTestCase):
         # Test unauthenticated first
         response = self.client.delete(
             self.api_site_url,
-            data={name='SlaveSite'})
+            data={name: 'SlaveSite'})
         # Check the correct http response
         self.assertEqual(reponse.status_code,401)
 
@@ -83,7 +83,7 @@ class SitesTest(ResourceTestCase):
         self.client.login(username=self.user, password=self.password)
         response = self.client.post(
             self.api_site_url,
-            data={name='SlaveSite'})
+            data={name: 'SlaveSite'})
         # Check the correct http response
         self.assertEqual(reponse.status_code,200)
 
