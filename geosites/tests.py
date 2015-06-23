@@ -27,6 +27,9 @@ class SitesTest(TestCase):
     fixtures = ['bobby']
 
     def setUp(self):
+        create_models(type='layer')
+        create_sites()
+
         self.user = 'admin'
         self.passwd = 'admin'
         self.admin = Profile.objects.get(username='admin')
@@ -38,8 +41,7 @@ class SitesTest(TestCase):
                                         kwargs={
                                             'api_name': 'api',
                                             'resource_name': 'layers'})
-        create_models(type='layer')
-        create_sites()
+        
         self.anonymous_user = get_anonymous_user()
         self.master_site = Site.objects.get(name='MasterSite')
         self.slave_site = Site.objects.get(name='SlaveSite')
@@ -140,6 +142,6 @@ class SitesTest(TestCase):
         """
         # The layers created through the tests will belong to the SlaveSite as per test settings
         # Create a Slave2 Site
-        slave2 = Site.objects.create(name='Slave2Site', domani="slave2.test.org")
+        slave2 = Site.objects.create(name='Slave2Site', domain="slave2.test.org")
         self.assertEqual(SiteResources.object.get(site=slave2).resources.count(), 0)
 
