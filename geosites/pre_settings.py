@@ -44,7 +44,7 @@ DATASTORE = ''
 ##### Production settings
 
 # DEBUG Settings
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 DEBUG_TOOLBAR = False
 

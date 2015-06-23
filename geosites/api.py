@@ -1,10 +1,16 @@
 from django.contrib.sites.models import Site
+from django.conf import settings
 
-from tastypie.api import Api
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
 
 from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
+from geonode.base.models import ResourceBase
+from geonode.layers.models import Layer
+from geonode.maps.models import Map
+from geonode.documents.models import Document
+from geonode.api.urls import api
+
 from .models import SiteResources
 
 # we should override the api's here to let them respect the sites
@@ -82,8 +88,6 @@ class SiteResource(ModelResource):
         }
         resource_name = 'sites'
 
-
-api = Api(api_name='api')
 
 api.register(LayerResource())
 api.register(MapResource())

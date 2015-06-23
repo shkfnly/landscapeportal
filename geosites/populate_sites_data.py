@@ -3,5 +3,5 @@
 from django.contrib.sites.models import Site
 
 def create_sites():
-    Site.objects.create(name='MasterSite', domani="master.test.org")
-    Site.objects.create(name='SlaveSite', domani="slave.test.org")
+    Site.objects.create(name='MasterSite', domain="master.test.org")
+    Site.objects.create(name='SlaveSite', domain="slave.test.org")
