@@ -14,7 +14,7 @@ SITE_ROOT = os.path.dirname(__file__)
 execfile(os.path.join(MASTER_ROOT, 'pre_settings.py'))
 
 SITE_ID = 2
-SITE_NAME = 'GeoSite ID %s' % SITE_ID
+SITE_NAME = 'GeoSite%s' % SITE_ID
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
