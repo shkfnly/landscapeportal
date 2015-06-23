@@ -19,7 +19,7 @@ setup(
     license="BSD",
     keywords="landscapeportal geonode django",
     url='https://github.com/landscapeportal/landscapeportal',
-    packages=['landscapeportal',],
+    packages=['landscapeportal','geosites',],
     include_package_data=True,
     zip_safe=False,
     install_requires=[

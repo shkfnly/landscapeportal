@@ -7,7 +7,7 @@
 import os
 import geosites
 
-# Path to Geosites app
+# Directory of this file - for GeoSites it's one up
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
