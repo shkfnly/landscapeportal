@@ -10,6 +10,5 @@ urlpatterns = patterns('',
    url(r'^/?$',
        TemplateView.as_view(template_name='site_index.html'),
        name='home'),
- ) + urlpatterns + patterns('',
-   url(r'', include(api.urls)),
- ) 
+    url(r'', include(api.urls)),
+ ) + urlpatterns

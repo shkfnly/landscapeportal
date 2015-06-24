@@ -1,5 +1,6 @@
 from django.contrib.sites.models import Site
 from django.conf import settings
+from django.contrib.sites.models import get_current_site
 
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
@@ -21,9 +22,8 @@ class CommonSiteModelApi(CommonModelApi):
 
     def apply_filters(self, request, applicable_filters):
         filtered = super(CommonSiteModelApi, self).apply_filters(request, applicable_filters)
-
         # Filter by site - although this 
-        resources_for_site = SiteResources().object.get(site__id=get_current_site(request).id).resources.all()
+        resources_for_site = SiteResources.objects.get(site__id=get_current_site(request).id).resources.all()
         filtered = filtered.filter(id__in=resources_for_site)
 
         return filtered
