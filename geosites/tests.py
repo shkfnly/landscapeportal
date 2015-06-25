@@ -105,15 +105,24 @@ class SiteTests(ResourceTestCase):
         # Check that the SiteResources has been deleted as well
         self.assertFalse(SiteResources.objects.filter(site=self.slave_site).exists())
 
-    def test_resolve_object_by_site(self):
+    def test_layer_detail_page_slave_site(self):
         """
-        Test that the resolve_object function correctly uses the site
+        Test that the detail page is not found of the resource is on another site
         """
-        # test that the CA layer, that does not belong to the SlaveSite, is not returned
-        self.assertIsNone(resolve_object(self.admin, Layer, None, self.slave_site))
+        # test that the CA layer detail page, that does not belong to the SlaveSite, is not found
+        self.client.login(username=self.user, password=self.passwd)
+        response = self.client.get(reverse('layer_detail', args=[Layer.objects.all()[0].typename]))
+        self.assertEqual(response.status_code, 404)
 
-        # test the same with the master site
-        self.assertIsNotNone(resolve_object(self.admin, Layer, None, self.slave_site))
+    @override_settings(SITE_ID=1)
+    def test_layer_detail_page_master_site(self):
+        """
+        Test that the detail page is allowed from the master site
+        """
+        # test that the CA layer detail page, that does not belong to the SlaveSite, is not found
+        self.client.login(username=self.user, password=self.passwd)
+        response = self.client.get(reverse('layer_detail', args=[Layer.objects.all()[0].typename]))
+        self.assertEqual(response.status_code, 200)
 
     def test_master_site_all_layers(self):
         """
@@ -138,16 +147,14 @@ class SiteTests(ResourceTestCase):
             remove_perm('view_resourcebase', self.bobby, layer.get_self_resource())
             remove_perm('view_resourcebase', anonymous_group, layer.get_self_resource())
 
-        # Set the domain so tat get_current_site picks the right one
-        c = Client()
-        c.login(username='bobby', password='bob')
-        response = c.get(self.api_layer_url)
+        self.client.login(username='bobby', password='bob')
+        response = self.client.get(self.api_layer_url)
         self.assertEquals(len(json.loads(response.content)['objects']), 5)
 
         # now test with superuser
-        c.logout()
-        c.login(username=self.user, password=self.passwd)
-        response = c.get(self.api_layer_url)
+        self.client.logout()
+        self.client.login(username=self.user, password=self.passwd)
+        response = self.client.get(self.api_layer_url)
         self.assertEquals(len(json.loads(response.content)['objects']), 7)
 
     def test_layer_created_belongs_correct_site(self):

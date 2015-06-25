@@ -15,7 +15,7 @@ execfile(os.path.join(GEONODE_ROOT, 'settings.py'))
 TIME_ZONE = 'America/New_York'
 
 # Directory where static and media files will be served from
-SERVE_PATH = '/data/'
+SERVE_PATH = ''
 
 # Key of database to be used as datastore for GeoServer
 DATASTORE = ''

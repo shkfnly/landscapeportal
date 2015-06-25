@@ -1,6 +1,31 @@
 from django.shortcuts import render
+from django.contrib.sites.models import get_current_site
+from django.http import Http404
+
+from geonode.layers.views import _resolve_layer, _PERMISSION_MSG_VIEW, layer_detail
+
+from .models import SiteResources
 
 # Create your views here.
 
-# we should try to override the views here and also the _resolve_object function to let it check for the site.
-# need to figure out the smartest way to inject it, on option could be by overriding all the resource detail urls
+def site_layer_detail(request, layername, template='layers/layer_detail.html'):
+
+    # BETTER WAY INSTEAD OF DO TWO _RESOLVE_LAYER PER CALL?
+    layer = _resolve_layer(
+        request,
+        layername,
+        'base.view_resourcebase',
+        _PERMISSION_MSG_VIEW)
+    site = get_current_site(request)
+    if not SiteResources.objects.get(site=site).resources.filter(pk=layer.pk).exists():
+        raise Http404
+    else:
+        return layer_detail(request, layername, template='layers/layer_detail.html')
+    
+
+def site_document_detail(request):
+    pass
+
+def site_map_detail(request):
+    pass
+

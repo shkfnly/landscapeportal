@@ -39,8 +39,8 @@ STATIC_ROOT = os.path.join(SERVE_PATH, 'static')
 MEDIA_ROOT = os.path.join(SERVE_PATH, 'uploaded')
 
 # update settings set in geonode settings now that some have been overwritten
-OGC_SERVER['default']['LOCATION'] = os.path.join(SITEURL, 'geoserver/')
-OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join(SITEURL, 'geoserver/')
+OGC_SERVER['default']['LOCATION'] = os.path.join('http://localhost:8080/geoserver/')
+OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join('http://localhost:8080/geoserver/')
 CATALOGUE['default']['URL'] = '%scatalogue/csw' % SITEURL
 PYCSW['CONFIGURATION']['metadata:main']['provider_url'] = SITEURL
 LOCAL_GEOSERVER['source']['url'] = OGC_SERVER['default']['PUBLIC_LOCATION'] + 'wms'
