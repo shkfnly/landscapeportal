@@ -7,7 +7,7 @@
 import os
 import geosites
 
-# Directory of master site - for GeoSites it's two up
+# Directory of master site
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
