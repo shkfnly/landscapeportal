@@ -12,7 +12,6 @@
 # Directories to search for templates
 TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT, 'templates/'),
-    os.path.join(GEOSITES_ROOT, 'site_template/templates/'), 
     os.path.join(GEOSITES_ROOT, 'templates/'),
     os.path.join(GEONODE_ROOT, 'templates/'),
 )
@@ -21,7 +20,6 @@ TEMPLATE_DIRS = (
 STATICFILES_DIRS = (
     os.path.join(SITE_ROOT, 'static/'),
     os.path.join(GEOSITES_ROOT, 'static/'),
-    os.path.join(GEOSITES_ROOT, 'site_template/static/'),
     os.path.join(GEONODE_ROOT, 'static/')
 )
 
