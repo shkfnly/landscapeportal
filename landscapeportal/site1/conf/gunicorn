@@ -5,7 +5,7 @@
 
 CONFIG = {
     #'mode': 'wsgi',
-    #'working_dir': '$ROOTPATH',
+    'working_dir': '/geo/landscapeportal/landscapeportal/site1',
     'python': '/geo/venv/bin/python',
     'args': (
         '--bind=127.0.0.1:8001',
