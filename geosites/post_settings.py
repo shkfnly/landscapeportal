@@ -33,7 +33,6 @@ if SITE_DATABASES:
 if SITE_APPS:
 	INSTALLED_APPS += SITE_APPS
 
-ROOT_URLCONF = 'geosites.urls'
 
 # Put static files in root
 STATIC_ROOT = os.path.join(SERVE_PATH, 'static')

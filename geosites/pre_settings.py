@@ -20,12 +20,12 @@ SERVE_PATH = '/data/'
 # Key of database to be used as datastore for GeoServer
 DATASTORE = ''
 
+# override urls for individual sites if needed
+ROOT_URLCONF = 'geosites.urls'
+
 ##### Global Overrides
 # Below are some common GeoNode settings that might be overridden to provide
 # global setting acrosss all sites. Can be overridden in a sites settings.
-
-# base urls for all sites
-#ROOT_URLCONF = 'geonode.urls'
 
 # admin email
 #THEME_ACCOUNT_CONTACT_EMAIL = ''
