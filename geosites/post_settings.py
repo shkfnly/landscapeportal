@@ -57,7 +57,7 @@ LOGGING['handlers']['gunicorn'] = {
     'level': 'DEBUG',
     'class': 'logging.handlers.RotatingFileHandler',
     'formatter': 'verbose',
-    'filename': '/web/cdesign/logs/gunicorn.errors',
+    'filename': '/geo/logs/gunicorn.errors',
 }
 LOGGING['loggers']['gunicorn'] = {
     'level': 'DEBUG',
