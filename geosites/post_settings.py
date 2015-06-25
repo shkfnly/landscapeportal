@@ -51,7 +51,7 @@ if DATASTORE in DATABASES.keys():
     OGC_SERVER['default']['DATASTORE'] = DATASTORE
 
 
-""" If using nginx/gunicorn this should be added
+# If using nginx/gunicorn this should be added
 # add gunicorn logging
 LOGGING['handlers']['gunicorn'] = {
     'level': 'DEBUG',
@@ -64,7 +64,6 @@ LOGGING['loggers']['gunicorn'] = {
     'handlers': ['gunicorn'],
     'propagate': True,
 }
-"""
 
 # DEBUG_TOOLBAR can interfere with Django - keep it off until needed
 if DEBUG_TOOLBAR:
