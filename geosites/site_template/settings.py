@@ -5,13 +5,14 @@
 ###############################################
 
 import os
+import geosites
 
 # Directory of master site - for GeoSites it's two up
-MASTER_ROOT = os.path.join('..', '../', os.path.dirname(__file__))
+GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
 # Read in GeoSites pre_settings
-execfile(os.path.join(MASTER_ROOT, 'pre_settings.py'))
+execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
 
 SITE_ID = 2
 SITE_NAME = 'GeoSite%s' % SITE_ID
@@ -19,7 +20,7 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
 # globally installed apps
-SITE_APPS = ()
+SITE_APPS = ('geosites',)
 
 # Site specific databases
 SITE_DATABASES = {}
@@ -41,4 +42,4 @@ SITE_DATABASES = {}
 
 
 # Read in GeoSites post_settings
-execfile(os.path.join(MASTER_ROOT, 'post_settings.py'))
+execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))
