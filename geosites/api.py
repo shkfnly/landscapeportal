@@ -4,6 +4,7 @@ from django.contrib.sites.models import get_current_site
 
 from tastypie.constants import ALL, ALL_WITH_RELATIONS
 from tastypie.resources import ModelResource
+from tastypie.authorization import DjangoAuthorization
 
 from geonode.api.resourcebase_api import CommonModelApi, CommonMetaApi
 from geonode.base.models import ResourceBase
@@ -11,7 +12,7 @@ from geonode.layers.models import Layer
 from geonode.maps.models import Map
 from geonode.documents.models import Document
 from geonode.api.urls import api
-
+    
 from .models import SiteResources
 
 # we should override the api's here to let them respect the sites
@@ -87,6 +88,8 @@ class SiteResource(ModelResource):
             'name': ALL
         }
         resource_name = 'sites'
+        allowed_methods = ['get', 'delete']
+        authorization = DjangoAuthorization()
 
 
 api.register(LayerResource())

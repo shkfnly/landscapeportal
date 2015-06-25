@@ -16,7 +16,6 @@ execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
 
 SITE_ID = 1
 SITE_NAME = 'GeoSite%s' % SITE_ID
-SITEURL = 'http://site1.landscapeportaldev'
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 

@@ -53,17 +53,17 @@ if DATASTORE in DATABASES.keys():
 
 # If using nginx/gunicorn this should be added
 # add gunicorn logging
-LOGGING['handlers']['gunicorn'] = {
-    'level': 'DEBUG',
-    'class': 'logging.handlers.RotatingFileHandler',
-    'formatter': 'verbose',
-    'filename': '/geo/logs/gunicorn.errors',
-}
-LOGGING['loggers']['gunicorn'] = {
-    'level': 'DEBUG',
-    'handlers': ['gunicorn'],
-    'propagate': True,
-}
+# LOGGING['handlers']['gunicorn'] = {
+#     'level': 'DEBUG',
+#     'class': 'logging.handlers.RotatingFileHandler',
+#     'formatter': 'verbose',
+#     'filename': '/geo/logs/gunicorn.errors',
+# }
+# LOGGING['loggers']['gunicorn'] = {
+#     'level': 'DEBUG',
+#     'handlers': ['gunicorn'],
+#     'propagate': True,
+# }
 
 # DEBUG_TOOLBAR can interfere with Django - keep it off until needed
 if DEBUG_TOOLBAR:

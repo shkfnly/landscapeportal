@@ -1,6 +1,6 @@
 import json
 
-from django.test import TestCase
+from tastypie.test import ResourceTestCase
 from django.test.utils import override_settings
 from django.contrib.auth import get_user_model
 from django.contrib.sites.models import get_current_site
@@ -23,7 +23,7 @@ from .models import SiteResources
 
 @override_settings(SITE_NAME='Slave')
 @override_settings(SITE_ID=2)
-class SiteTests(TestCase):
+class SiteTests(ResourceTestCase):
 
     """Tests the sites functionality
     """
@@ -38,18 +38,23 @@ class SiteTests(TestCase):
         self.passwd = 'admin'
         self.admin = Profile.objects.get(username='admin')
         self.bobby = Profile.objects.get(username='bobby')
+        self.master_site = Site.objects.get(name='Master')
+        self.slave_site = Site.objects.get(name='Slave')
         self.api_site_url = reverse('api_dispatch_list',
                                 kwargs={
                                     'api_name': 'api',
                                     'resource_name': 'sites'})
+        self.api_slave_detail_url = reverse('api_dispatch_detail',
+                                kwargs={
+                                    'api_name': 'api',
+                                    'resource_name': 'sites',
+                                    'pk': self.slave_site.pk})
         self.api_layer_url = reverse('api_dispatch_list',
                                         kwargs={
                                             'api_name': 'api',
                                             'resource_name': 'layers'})
         
         self.anonymous_user = get_anonymous_user()
-        self.master_site = Site.objects.get(name='Master')
-        self.slave_site = Site.objects.get(name='Slave')
         self.slave2_data = {'name': 'Slave2',
                             'domain': 'slave2.test.org'}
         # all layers belong to slave bu let's remove one resource from it
@@ -64,7 +69,7 @@ class SiteTests(TestCase):
             self.api_site_url,
             data=self.slave2_data)
         # Check the correct http response
-        self.assertEqual(reponse.status_code,401)
+        self.assertEqual(response.status_code,401)
 
         # Test as admin
         self.client.login(username=self.user, password=self.password)
@@ -72,29 +77,27 @@ class SiteTests(TestCase):
             self.api_site_url,
             data=self.slave2_data)
         # Check the correct http response
-        self.assertEqual(reponse.status_code,200)
+        self.assertEqual(response.status_code,200)
 
         # Check the object is created in the db
         self.assertTrue(Site.objects.filter(name='Slave2Site').exists())
 
     def test_delete_site(self):
         """
-        Test the deletion of sites
+        Test the deletion of sites also removes the SiteResources
         """
         # Test unauthenticated first
         response = self.client.delete(
-            self.api_site_url,
-            data={name: 'Slave'})
+            self.api_slave_detail_url,
+            data={'name': 'Slave'})
         # Check the correct http response
-        self.assertEqual(reponse.status_code,401)
+        self.assertEqual(response.status_code,401)
 
         # Test as admin
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.post(
-            self.api_site_url,
-            data={name: 'Slave'})
+        self.client.login(username=self.user, password=self.passwd)
+
         # Check the correct http response
-        self.assertEqual(reponse.status_code,200)
+        self.assertHttpAccepted(self.client.delete(self.api_slave_detail_url))
 
         # Check the object is created in the db
         self.assertFalse(Site.objects.filter(name='Slave').exists())
