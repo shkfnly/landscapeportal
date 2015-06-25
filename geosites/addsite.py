@@ -1,4 +1,4 @@
-# script for adding new site
+# script for adding new site should be made into mangaement command
 
 # add site to django database, get SITE_ID
 
