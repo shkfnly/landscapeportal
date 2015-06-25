@@ -1,0 +1,17 @@
+
+# This template uses the following variables to be filled in
+#  $ROOTPATH	- path to main project (used to store logs, uploaded, static, virtual env)
+#  $PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
+
+CONFIG = {
+    #'mode': 'wsgi',
+    #'working_dir': '$ROOTPATH',
+    'python': '$ROOTPATH/venv/bin/python',
+    'args': (
+        '--bind=127.0.0.1:$PORTNUM',
+        '--workers=4',
+        '--timeout=300',
+        'wsgi',
+        #'--log-level=debug',
+    ),
+}
