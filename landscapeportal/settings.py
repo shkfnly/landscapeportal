@@ -1,1 +1,0 @@
-../geosites/settings_template.py
