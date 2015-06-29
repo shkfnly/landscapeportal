@@ -88,7 +88,7 @@ class SiteResource(ModelResource):
             'name': ALL
         }
         resource_name = 'sites'
-        allowed_methods = ['get', 'delete']
+        allowed_methods = ['get', 'delete', 'post']
         authorization = DjangoAuthorization()
 
 

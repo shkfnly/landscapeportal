@@ -31,6 +31,7 @@ class SiteTests(ResourceTestCase):
     fixtures = ['bobby']
 
     def setUp(self):
+        super(SiteTests, self).setUp()
         create_sites()
         create_models(type='layer')
 
@@ -65,22 +66,23 @@ class SiteTests(ResourceTestCase):
         Test the creation of new sites
         """
         # Test unauthenticated first
-        response = self.client.post(
+        response = self.api_client.post(
             self.api_site_url,
             data=self.slave2_data)
         # Check the correct http response
-        self.assertEqual(response.status_code,401)
+        self.assertEqual(response.status_code, 401)
 
         # Test as admin
-        self.client.login(username=self.user, password=self.password)
-        response = self.client.post(
+        self.api_client.client.login(username=self.user, password=self.passwd)
+        response = self.api_client.post(
             self.api_site_url,
+            format='json',
             data=self.slave2_data)
         # Check the correct http response
-        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.status_code, 201)
 
         # Check the object is created in the db
-        self.assertTrue(Site.objects.filter(name='Slave2Site').exists())
+        self.assertTrue(Site.objects.filter(name='Slave2').exists())
 
     def test_delete_site(self):
         """
@@ -166,3 +168,47 @@ class SiteTests(ResourceTestCase):
         slave2 = Site.objects.create(name='Slave2', domain="slave2.test.org")
         self.assertEqual(SiteResources.objects.get(site=slave2).resources.count(), 0)
 
+    def test_layer_acls_slave_site(self):
+        """Test that the layer_acls overridden function behaves correctly on a slave site"""
+        acls_site_url = reverse('site_layer_acls')
+        # first with unauthenticated user
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 0)
+        self.assertEqual(len(self.deserialize(response)['ro']), 7)
+        # then as bobby
+        self.client.login(username='bobby', password='bob')
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 0)
+        self.assertEqual(len(self.deserialize(response)['ro']), 7)
+        # then as admin
+        self.client.logout()
+        self.client.login(username=self.user, password=self.passwd)
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 7)
+        self.assertEqual(len(self.deserialize(response)['ro']), 0)
+
+    @override_settings(SITE_ID=1)
+    def test_layer_acls_master_site(self):
+        """Test that the layer_acls overridden function behaves correctly on a master site"""
+        acls_site_url = reverse('site_layer_acls')
+        # first with unauthenticated user
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 0)
+        self.assertEqual(len(self.deserialize(response)['ro']), 8)
+        # then as bobby
+        self.client.login(username='bobby', password='bob')
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 0)
+        self.assertEqual(len(self.deserialize(response)['ro']), 8)
+        # then as admin
+        self.client.logout()
+        self.client.login(username=self.user, password=self.passwd)
+        response = self.client.get(acls_site_url)
+        self.assertValidJSONResponse(response)
+        self.assertEqual(len(self.deserialize(response)['rw']), 8)
+        self.assertEqual(len(self.deserialize(response)['ro']), 0)
