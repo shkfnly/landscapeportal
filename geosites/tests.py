@@ -159,11 +159,10 @@ class SiteTests(ResourceTestCase):
         response = self.client.get(self.api_layer_url)
         self.assertEquals(len(json.loads(response.content)['objects']), 7)
 
-    def test_layer_created_belongs_correct_site(self):
+    def test_new_site_cant_see_layers(self):
         """
-        Test that a layer created in a normal site belongs to that site and to the master site only
+        Test that a new site can't see any layer
         """
-        # The layers created through the tests will belong to the SlaveSite as per test settings
         # Create a Slave2 Site
         slave2 = Site.objects.create(name='Slave2', domain="slave2.test.org")
         self.assertEqual(SiteResources.objects.get(site=slave2).resources.count(), 0)

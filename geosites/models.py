@@ -17,6 +17,9 @@ class SiteResources(models.Model):
     def __unicode__(self):
         return self.site.name
 
+    class Meta:
+        verbose_name_plural = 'Site Resources'
+
 
 def post_save_resource(instance, sender, **kwargs):
     """Signal to ensure that every created resource is 

@@ -13,8 +13,8 @@ urlpatterns = patterns('',
        name='home'),
     url(r'', include(api.urls)),
     # Override the detail pages to respect the sites
-    url(r'^layers/(?P<layername>[^/]*)/?$', site_layer_detail, name="layer_detail"),
-    url(r'^documents/(?P<docid>\d+)/?$', site_document_detail, name='document_detail'),
-    url(r'^maps/(?P<mapid>[^/]+)/?$', site_map_detail, name='map_detail'),
+    url(r'^layers/(?P<layername>[^/]*)?/$', site_layer_detail, name="layer_detail"),
+    url(r'^documents/(?P<docid>\d+)?/$', site_document_detail, name='document_detail'),
+    url(r'^maps/(?P<mapid>[^/]+)?/$', site_map_detail, name='map_detail'),
     url(r'^geoserver/acls/?$', layer_acls, name='site_layer_acls'),
  ) + urlpatterns
