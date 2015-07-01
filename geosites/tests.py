@@ -17,7 +17,6 @@ from geonode.layers.models import Layer
 from geonode.groups.models import Group
 
 from .populate_sites_data import create_sites
-from .utils import resolve_object
 from .models import SiteResources
 
 
@@ -58,8 +57,8 @@ class SiteTests(ResourceTestCase):
         self.anonymous_user = get_anonymous_user()
         self.slave2_data = {'name': 'Slave2',
                             'domain': 'slave2.test.org'}
-        # all layers belong to slave bu let's remove one resource from it
-        SiteResources.objects.get(site=self.slave_site).resources.remove(Layer.objects.all()[0])
+        # all layers belong to slave but let's remove one resource from it (CA)
+        SiteResources.objects.get(site=self.slave_site).resources.remove(Layer.objects.get(typename='geonode:CA'))
 
     def test_create_new_site(self):
         """
