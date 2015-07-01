@@ -14,6 +14,7 @@ from geonode.base.models import ResourceBase
 from geonode.layers.models import Layer
 
 from .models import SiteResources
+from .utils import resources_for_site
 
 _PERMISSION_MSG_VIEW = ('You don\'t have permissions to view this document')
 
@@ -103,11 +104,11 @@ def layer_acls(request):
 
     # Include permissions on the anonymous user
     # use of polymorphic selectors/functions to optimize performances
-    resources_for_site = SiteResources.objects.get(site__id=get_current_site(request).id).resources.all()
+    site_resources = resources_for_site()
     resources_readable = get_objects_for_user(acl_user, 'view_resourcebase',
-                                              ResourceBase.objects.instance_of(Layer).filter(id__in=resources_for_site))
+                                              ResourceBase.objects.instance_of(Layer).filter(id__in=site_resources))
     layer_writable = get_objects_for_user(acl_user, 'change_layer_data',
-                                          Layer.objects.filter(id__in=resources_for_site))
+                                          Layer.objects.filter(id__in=site_resources))
 
     _read = set(Layer.objects.filter(id__in=resources_readable).values_list('typename', flat=True))
     _write = set(layer_writable.values_list('typename', flat=True))

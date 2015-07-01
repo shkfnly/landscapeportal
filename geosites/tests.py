@@ -168,7 +168,7 @@ class SiteTests(ResourceTestCase):
 
     def test_layer_acls_slave_site(self):
         """Test that the layer_acls overridden function behaves correctly on a slave site"""
-        acls_site_url = reverse('site_layer_acls')
+        acls_site_url = reverse('layer_acls_dep')
         # first with unauthenticated user
         response = self.client.get(acls_site_url)
         self.assertValidJSONResponse(response)
@@ -191,7 +191,7 @@ class SiteTests(ResourceTestCase):
     @override_settings(SITE_ID=1)
     def test_layer_acls_master_site(self):
         """Test that the layer_acls overridden function behaves correctly on a master site"""
-        acls_site_url = reverse('site_layer_acls')
+        acls_site_url = reverse('layer_acls_dep')
         # first with unauthenticated user
         response = self.client.get(acls_site_url)
         self.assertValidJSONResponse(response)
