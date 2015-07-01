@@ -4,6 +4,9 @@
 # Geosite master local_settings
 ###############################################
 
+# path for static and uploaded files
+#SERVE_PATH = ''
+
 # share a database
 """
 DATABASES = {
