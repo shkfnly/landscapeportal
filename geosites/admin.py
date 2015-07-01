@@ -2,4 +2,9 @@ from django.contrib import admin
 
 from .models import SiteResources
 
-admin.site.register(SiteResources)
+
+class SiteResourceAdmin(admin.ModelAdmin):
+    filter_horizontal = ('resources',)
+    readonly_fields = ('site',)
+
+admin.site.register(SiteResources, SiteResourceAdmin)
