@@ -20,7 +20,7 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
 # globally installed apps
-SITE_APPS = ('geosites',)
+SITE_APPS = ()
 
 # Site specific databases
 SITE_DATABASES = {

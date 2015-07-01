@@ -23,6 +23,8 @@ DATASTORE = ''
 # override urls for individual sites if needed
 ROOT_URLCONF = 'geosites.urls'
 
+INSTALLED_APPS = ('geosites',) + INSTALLED_APPS
+
 ##### Global Overrides
 # Below are some common GeoNode settings that might be overridden to provide
 # global setting acrosss all sites. Can be overridden in a sites settings.
@@ -31,7 +33,7 @@ ROOT_URLCONF = 'geosites.urls'
 #THEME_ACCOUNT_CONTACT_EMAIL = ''
 
 # globally installed apps
-#INSTALLED_APPS = ()
+#INSTALLED_APPS = () + INSTALLED_APPS
 
 # Common to globally allow specific document size (GeoNode default is 2)
 #MAX_DOCUMENT_SIZE = 10
