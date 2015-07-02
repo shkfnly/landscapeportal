@@ -16,12 +16,11 @@ execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
 
 SITE_ID = 1
 SITE_NAME = 'GeoSite%s' % SITE_ID
-SITEURL = 'http://localhost:8000'
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
-# globally installed apps
-SITE_APPS = ('geosites',)
+# site installed apps
+SITE_APPS = ()
 
 # Site specific databases
 SITE_DATABASES = {}
@@ -40,6 +39,11 @@ SITE_DATABASES = {}
 
 # Allow users to register
 #REGISTRATION_OPEN = True
+
+# These are some production settings that should be changed here or in local_settings
+#SITEURL = 'http://geonode.org'
+#OGC_SERVER['default']['LOCATION'] = os.path.join(SITEURL, 'geoserver/')
+#OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join(SITEURL, 'geoserver/')
 
 
 # Read in GeoSites post_settings

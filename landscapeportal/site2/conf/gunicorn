@@ -5,10 +5,10 @@
 
 CONFIG = {
     #'mode': 'wsgi',
-    'working_dir': '/geo/landscapeportal/landscapeportal/site1',
+    'working_dir': '/geo/landscapeportal/landscapeportal/site2',
     'python': '/geo/venv/bin/python',
     'args': (
-        '--bind=127.0.0.1:8001',
+        '--bind=127.0.0.1:8002',
         '--workers=4',
         '--timeout=300',
         'wsgi',

@@ -20,7 +20,9 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
 # globally installed apps
-SITE_APPS = ('geosites', 'zinnia', 'django_comments', 'tagging')
+
+# site installed apps
+SITE_APPS = ('zinnia', 'django_comments', 'tagging')
 
 # Site specific databases
 SITE_DATABASES = {
@@ -34,9 +36,6 @@ SITE_DATABASES = {
 # Below are some common GeoNode settings that might be overridden for site
 
 SITE_TEMPLATE_CONTEXT_PROCESSORS = ('zinnia.context_processors.version',)
-
-##### Overrides
-# Below are some common GeoNode settings that might be overridden for site
 
 # base urls for all sites
 ROOT_URLCONF = 'landscapeportal.master.urls'

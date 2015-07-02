@@ -14,7 +14,7 @@
 
 server {
     listen 80;
-    server_name site1.*;
+    server_name site1.* master.*;
 
     client_max_body_size 1G;
     send_timeout 120;

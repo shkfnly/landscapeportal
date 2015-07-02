@@ -1,0 +1,18 @@
+[
+  {
+    "model": "sites.site",
+    "pk": 1,
+    "fields": {
+      "domain": "master.lpgeo",
+      "name": "Master"
+    }
+  },
+  {
+    "model": "sites.site",
+    "pk": 2,
+    "fields": {
+      "domain": "site2.lpgeo",
+      "name": "Site2"
+    }
+  }
+]
