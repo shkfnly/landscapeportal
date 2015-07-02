@@ -14,12 +14,12 @@ execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
 ROOT_URLCONF = 'landscapeportal.urls'
 
 # Zinnia blog app
-INSTALLED_APPS = (
+INSTALLED_APPS = INSTALLED_APPS + (
 	'zinnia',
 	'django_comments',
 	'tagging'
-) + INSTALLED_APPS
+)
 
-TEMPLATE_CONTEXT_PROCESSORS = (
+TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
 	'zinnia.context_processors.version',
-) + TEMPLATE_CONTEXT_PROCESSORS
+)
