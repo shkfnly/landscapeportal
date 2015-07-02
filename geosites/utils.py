@@ -41,13 +41,6 @@ def add_site(name, domain):
     used_ids = [v[0] for v in sites.values_list()]
     site_id = max(used_ids) + 1
 
-    # add site to database
-    site = Site(id=site_id, name=name, domain=domain)
-    site.save()
-
-    # check sites
-    print sites.values_list()
-
     # current settings is one of the sites
     project_dir = os.path.realpath(os.path.join(settings.SITE_ROOT, '../'))
     site_dir = os.path.join('site%s' % site_id)
@@ -68,10 +61,13 @@ def add_site(name, domain):
     sed(os.path.join(site_dir, 'settings.py'), change_dict)
     sed(os.path.join(site_dir, 'local_settings_template.py'), change_dict)
 
+    # add site to database
+    site = Site(id=site_id, name=name, domain=domain)
+    site.save()
     dump_model(Site, os.path.join(project_dir, 'sites.json')
 
     # link configs
     # i don't like having server specific stuff here, should be moved into system script
     # to link configs, restart nginx and gunicorn (or apache)
-    os.symlink(os.path.join(src, 'conf', 'nginx'), '/etc/nginx/sites-enabled/site%s' % siteid)
-    os.symlink(os.path.join(src, 'conf', 'gunicorn'), '/etc/gunicorn.d/site%s' % siteid)
+    os.symlink(os.path.join(site_dir, 'conf', 'nginx'), '/etc/nginx/sites-enabled/site%s' % site_id)
+    os.symlink(os.path.join(site_dir, 'conf', 'gunicorn'), '/etc/gunicorn.d/site%s' % site_id)
