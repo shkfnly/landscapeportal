@@ -43,7 +43,7 @@ def add_site(name, domain):
 
     # current settings is one of the sites
     project_dir = os.path.realpath(os.path.join(settings.SITE_ROOT, '../'))
-    site_dir = os.path.join('site%s' % site_id)
+    site_dir = os.path.join(project_dir, 'site%s' % site_id)
     site_template = os.path.join(os.path.dirname(__file__), 'site_template')
     shutil.copytree(site_template, site_dir)
 
@@ -65,9 +65,3 @@ def add_site(name, domain):
     site = Site(id=site_id, name=name, domain=domain)
     site.save()
     dump_model(Site, os.path.join(project_dir, 'sites.json'))
-
-    # link configs
-    # i don't like having server specific stuff here, should be moved into system script
-    # to link configs, restart nginx and gunicorn (or apache)
-    os.symlink(os.path.join(site_dir, 'conf', 'nginx'), '/etc/nginx/sites-enabled/site%s' % site_id)
-    os.symlink(os.path.join(site_dir, 'conf', 'gunicorn'), '/etc/gunicorn.d/site%s' % site_id)
