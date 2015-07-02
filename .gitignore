@@ -3,5 +3,4 @@
 .DS_Store
 
 development.db
-uploaded
-settings_slave.py
+local_settings.py
