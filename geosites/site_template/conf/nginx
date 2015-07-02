@@ -1,9 +1,9 @@
 
 # This template uses the following variables to be filled in
-#  $SITEURL  	- base url
-#  $ROOTPATH	- path to main project (used to store logs, uploaded, static)
-#  $GSURL		- GeoServer machine URL (can be localhost)
-#  $PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
+#  DOMAIN  	    - base url
+#  SERVE_PATH	- path to main project (used to store logs, uploaded, static)
+#  GSURL		- GeoServer machine URL (can be localhost)
+#  PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
 
 # If virtual host responds to multiple names this server block ensures request 
 # domain is always same or else cookies have problems between GeoServer and main site
@@ -14,25 +14,25 @@
 
 server {
     listen 80;
-    server_name $SITEURL;
+    server_name $DOMAIN;
 
     client_max_body_size 1G;
     send_timeout 120;
 
-    access_log $ROOTPATH/logs/access.log;
-    error_log $ROOTPATH/logs/error.log;
+    access_log $SERVE_PATH/logs/access.log;
+    error_log $SERVE_PATH/logs/error.log;
 
     location /static {
-        alias $ROOTPATH/static;
+        alias $SERVE_PATH/static;
         gzip_static on;
     }
 
     location /media {
-        alias $ROOTPATH/media;
+        alias $SERVE_PATH/media;
     }
 
     location /uploaded {
-        alias $ROOTPATH/uploaded;
+        alias $SERVE_PATH/uploaded;
     }
 
     location /favicon.ico {
@@ -60,7 +60,7 @@ server {
         proxy_set_header    X-Forwarded-Host $host;
         proxy_set_header    X-Forwarded-Server $host;
         proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass          http://$GSURL:8080/geoserver/;
+        proxy_pass          http://$DOMAIN:8080/geoserver/;
         proxy_set_header    X-Real-IP $remote_addr;
         proxy_redirect  default;
         proxy_pass_header   Set-Cookie;

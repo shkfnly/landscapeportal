@@ -5,7 +5,7 @@
 ###############################################
 
 # Outside URL
-#SITEURL = 'http://www.geonode.org'
+#SITEURL = 'http://$DOMAIN'
 
 # databases unique to site if not defined in site settings
 """
