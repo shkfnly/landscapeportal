@@ -25,6 +25,9 @@ ROOT_URLCONF = 'geosites.urls'
 
 INSTALLED_APPS = ('geosites',) + INSTALLED_APPS
 
+# put development database in common location for all sites
+DATABASES['default']['NAME'] = os.path.join(SITE_ROOT, '..', 'development.db')
+
 ##### Global Overrides
 # Below are some common GeoNode settings that might be overridden to provide
 # global setting acrosss all sites. Can be overridden in a sites settings.
