@@ -26,10 +26,10 @@ SITE_APPS = ('zinnia', 'django_comments', 'tagging')
 
 # Site specific databases
 SITE_DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(PROJECT_ROOT, '../development.db'),
-    },
+    #'mydb': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(PROJECT_ROOT, '../development.db'),
+    #},
 }
 
 ##### Overrides
