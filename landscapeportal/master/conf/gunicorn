@@ -11,6 +11,8 @@ CONFIG = {
         '--bind=127.0.0.1:8001',
         '--workers=4',
         '--timeout=300',
+        '--access-logfile=/geo/logs/master-gunicorn-access.log',
+        '--error-logfile=/geo/logs/master-gunicorn-error.log',
         'wsgi',
         #'--log-level=debug',
     ),

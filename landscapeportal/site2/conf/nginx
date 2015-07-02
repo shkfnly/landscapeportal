@@ -19,8 +19,8 @@ server {
     client_max_body_size 1G;
     send_timeout 120;
 
-    access_log /geo/logs/access.log;
-    error_log /geo/logs/error.log;
+    access_log /geo/logs/site2-nginx-access.log;
+    error_log /geo/logs/site2-nginx-error.log;
 
     location /static {
         alias /geo/static;
