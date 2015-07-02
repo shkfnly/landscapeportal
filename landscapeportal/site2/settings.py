@@ -20,9 +20,9 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
 # globally installed apps
+SITE_APPS = ('zinnia', 'django_comments', 'tagging')
 
 # site installed apps
-SITE_APPS = ('zinnia', 'django_comments', 'tagging')
 
 # Site specific databases
 SITE_DATABASES = {
