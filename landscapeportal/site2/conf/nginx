@@ -1,9 +1,10 @@
 
 # This template uses the following variables to be filled in
-#  $SITEURL  	- base url
-#  $ROOTPATH	- path to main project (used to store logs, uploaded, static)
-#  $GSURL		- GeoServer machine URL (can be localhost)
-#  $PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
+#  DOMAIN  	    - base url
+#  SITE_NAME	- name of site
+#  SERVE_PATH	- path to main project (used to store logs, uploaded, static)
+#  GSURL		- GeoServer machine URL (can be localhost)
+#  PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
 
 # If virtual host responds to multiple names this server block ensures request 
 # domain is always same or else cookies have problems between GeoServer and main site
@@ -14,7 +15,7 @@
 
 server {
     listen 80;
-    server_name site2.*;
+    server_name site2.lpgeo;
 
     client_max_body_size 1G;
     send_timeout 120;
@@ -60,7 +61,7 @@ server {
         proxy_set_header    X-Forwarded-Host $host;
         proxy_set_header    X-Forwarded-Server $host;
         proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass          http://91.225.62.70:8080/geoserver/;
+        proxy_pass          http://site2.lpgeo:8080/geoserver/;
         proxy_set_header    X-Real-IP $remote_addr;
         proxy_redirect  default;
         proxy_pass_header   Set-Cookie;
