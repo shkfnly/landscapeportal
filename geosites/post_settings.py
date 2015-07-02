@@ -7,20 +7,20 @@
 # to finalize some derived settings
 ###############################################
 
-# site local_settings
-try:
-    # load in local_settings (usually for setting SITEURL and DATABASES for production)
-    execfile(os.path.join(SITE_ROOT, 'local_settings.py'))
-except:
-    # there are no site local_settings to import
-    pass
-
 # master local_settings
 try:
     # load in local_settings (usually for setting SITEURL and DATABASES for production)
     execfile(os.path.join(SITE_ROOT, '../', 'local_settings.py'))
 except:
     # there are no master local_settings to import
+    pass
+
+# site local_settings
+try:
+    # load in local_settings (usually for setting SITEURL and DATABASES for production)
+    execfile(os.path.join(SITE_ROOT, 'local_settings.py'))
+except:
+    # there are no site local_settings to import
     pass
 
 # Directories to search for templates
@@ -43,7 +43,10 @@ if SITE_DATABASES:
 
 # Update apps if site has own apps
 if SITE_APPS:
-    INSTALLED_APPS += SITE_APPS
+	INSTALLED_APPS += SITE_APPS
+
+if SITE_TEMPLATE_CONTEXT_PROCESSORS:
+    TEMPLATE_CONTEXT_PROCESSORS + SITE_TEMPLATE_CONTEXT_PROCESSORS
 
 # Put static files in root
 STATIC_ROOT = os.path.join(SERVE_PATH, 'static')
@@ -52,6 +55,9 @@ STATIC_ROOT = os.path.join(SERVE_PATH, 'static')
 MEDIA_ROOT = os.path.join(SERVE_PATH, 'uploaded')
 
 # update settings set in geonode settings now that some have been overwritten
+# note next 2 lines will prevent dev server from running properly
+OGC_SERVER['default']['LOCATION'] = os.path.join(SITEURL, 'geoserver/')
+OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join(SITEURL, 'geoserver/')
 CATALOGUE['default']['URL'] = '%scatalogue/csw' % SITEURL
 PYCSW['CONFIGURATION']['metadata:main']['provider_url'] = SITEURL
 LOCAL_GEOSERVER['source']['url'] = OGC_SERVER['default']['PUBLIC_LOCATION'] + 'wms'
