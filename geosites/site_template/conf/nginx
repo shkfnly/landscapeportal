@@ -1,6 +1,7 @@
 
 # This template uses the following variables to be filled in
 #  DOMAIN  	    - base url
+#  SITE_NAME	- name of site
 #  SERVE_PATH	- path to main project (used to store logs, uploaded, static)
 #  GSURL		- GeoServer machine URL (can be localhost)
 #  PORTNUM		- Port number to use for wsgi app: use 80XX where XX is SITE_ID
@@ -19,8 +20,8 @@ server {
     client_max_body_size 1G;
     send_timeout 120;
 
-    access_log $SERVE_PATH/logs/access.log;
-    error_log $SERVE_PATH/logs/error.log;
+    access_log $SERVE_PATH/logs/$SITENAME-nginx-access.log;
+    error_log $SERVE_PATH/logs/$SITENAME-nginx-error.log;
 
     location /static {
         alias $SERVE_PATH/static;
