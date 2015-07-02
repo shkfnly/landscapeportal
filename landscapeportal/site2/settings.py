@@ -19,7 +19,7 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
-# globally installed apps
+# site installed apps
 SITE_APPS = ()
 
 # Site specific databases
