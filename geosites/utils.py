@@ -64,7 +64,7 @@ def add_site(name, domain):
     # add site to database
     site = Site(id=site_id, name=name, domain=domain)
     site.save()
-    dump_model(Site, os.path.join(project_dir, 'sites.json')
+    dump_model(Site, os.path.join(project_dir, 'sites.json'))
 
     # link configs
     # i don't like having server specific stuff here, should be moved into system script
