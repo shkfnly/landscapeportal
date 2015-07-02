@@ -12,33 +12,21 @@ GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
 # Read in GeoSites pre_settings
-execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
+execfile(os.path.join(SITE_ROOT, '../', 'pre_settings.py'))
 
 SITE_ID = 1
 SITE_NAME = 'Master'
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
-# globally installed apps
-SITE_APPS = ('zinnia', 'django_comments', 'tagging')
-
 # site installed apps
+SITE_APPS = ()
 
 # Site specific databases
-SITE_DATABASES = {
-    #'mydb': {
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(PROJECT_ROOT, '../development.db'),
-    #},
-}
+SITE_DATABASES = {}
 
 ##### Overrides
 # Below are some common GeoNode settings that might be overridden for site
-
-SITE_TEMPLATE_CONTEXT_PROCESSORS = ('zinnia.context_processors.version',)
-
-# base urls for all sites
-ROOT_URLCONF = 'landscapeportal.master.urls'
 
 # admin email
 #THEME_ACCOUNT_CONTACT_EMAIL = ''

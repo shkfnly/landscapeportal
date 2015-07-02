@@ -12,7 +12,7 @@ GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
 # Read in GeoSites pre_settings
-execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
+execfile(os.path.join(SITE_ROOT, '../', 'pre_settings.py'))
 
 SITE_ID = $SITE_ID
 SITE_NAME = '$SITE_NAME'
