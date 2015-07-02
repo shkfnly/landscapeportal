@@ -20,8 +20,8 @@ server {
     client_max_body_size 1G;
     send_timeout 120;
 
-    access_log $SERVE_PATH/logs/$SITENAME-nginx-access.log;
-    error_log $SERVE_PATH/logs/$SITENAME-nginx-error.log;
+    access_log $SERVE_PATH/logs/$SITE_NAME-nginx-access.log;
+    error_log $SERVE_PATH/logs/$SITE_NAME-nginx-error.log;
 
     location /static {
         alias $SERVE_PATH/static;
