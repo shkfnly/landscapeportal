@@ -45,12 +45,6 @@ SITE_DATABASES = {
 # Allow users to register
 #REGISTRATION_OPEN = True
 
-try:
-	# load in local_settings (usually for setting SITEURL and DATABASES for production)
-	execfile(os.path.join(SITE_ROOT, 'local_settings.py'))
-except:
-	# there are no site local_settings to import
-	pass
 
 # Read in GeoSites post_settings
 execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))

@@ -4,15 +4,6 @@
 # Geosite local settings
 ###############################################
 
-# load local_settings from master
-
-try:
-    # load local_settings from base project directory
-    execfile(os.path.join(SITE_ROOT, '../', 'local_settings.py'))
-except:
-    # there are no master local_settings to import
-    pass
-
 # Outside URL
 #SITEURL = 'http://www.geonode.org'
 

@@ -7,7 +7,21 @@
 # to finalize some derived settings
 ###############################################
 
-# Path to GeoNode installation
+# master local_settings
+try:
+    # load in local_settings (usually for setting SITEURL and DATABASES for production)
+    execfile(os.path.join(SITE_ROOT, '../', 'local_settings.py'))
+except:
+    # there are no master local_settings to import
+    pass
+
+# site local_settings
+try:
+    # load in local_settings (usually for setting SITEURL and DATABASES for production)
+    execfile(os.path.join(SITE_ROOT, 'local_settings.py'))
+except:
+    # there are no site local_settings to import
+    pass
 
 # Directories to search for templates
 TEMPLATE_DIRS = (
