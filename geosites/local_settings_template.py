@@ -15,8 +15,8 @@ DATABASES = {
         'NAME': '',
         'USER' : '',
         'PASSWORD' : '',
-        'HOST' : '',
-        'PORT' : '',
+        'HOST' : 'localhost',
+        'PORT' : '5432',
     }
     # vector datastore for uploads
     # 'datastore' : {
