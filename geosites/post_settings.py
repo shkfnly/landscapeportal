@@ -7,6 +7,14 @@
 # to finalize some derived settings
 ###############################################
 
+# geonode local_settings
+try:
+    # load in local_settings from system installed geonode
+    execfile(os.path.join(GEONODE_ROOT, 'local_settings.py'))
+except:
+    # there are no system geonode local_settings to import
+    pass
+
 # master local_settings
 try:
     # load in local_settings (usually for setting SITEURL and DATABASES for production)
