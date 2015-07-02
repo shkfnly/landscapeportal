@@ -19,22 +19,26 @@ SITE_NAME = 'GeoSite%s' % SITE_ID
 # Should be unique for each site
 SECRET_KEY = "fbk3CC3N6jt1AU9mGIcI"
 
+# globally installed apps
+SITE_APPS = ('zinnia', 'django_comments', 'tagging')
+
 # site installed apps
-SITE_APPS = ()
 
 # Site specific databases
 SITE_DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(PROJECT_ROOT, '../development.db'),
-    # },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(PROJECT_ROOT, '../development.db'),
+    },
 }
 
 ##### Overrides
 # Below are some common GeoNode settings that might be overridden for site
 
+SITE_TEMPLATE_CONTEXT_PROCESSORS = ('zinnia.context_processors.version',)
+
 # base urls for all sites
-#ROOT_URLCONF = 'geonode.urls'
+ROOT_URLCONF = 'landscapeportal.master.urls'
 
 # admin email
 #THEME_ACCOUNT_CONTACT_EMAIL = ''
