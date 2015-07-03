@@ -5,7 +5,7 @@
 ###############################################
 
 # Outside URL
-#SITEURL = 'http://site2.lpgeo'
+SITEURL = 'http://site2.lpgeo'
 
 # databases unique to site if not defined in site settings
 """
