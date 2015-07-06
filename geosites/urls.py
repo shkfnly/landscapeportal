@@ -5,7 +5,6 @@ from geonode.urls import urlpatterns
 from .api import api
 from .views import site_layer_detail, site_document_detail, site_map_detail, layer_acls
 
-# we will override the api url over the geonode ones and resource details urls
 
 urlpatterns = patterns('',
    url(r'^/?$',
