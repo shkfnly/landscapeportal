@@ -1,8 +1,9 @@
 import json
 
-from django.shortcuts import render
 from django.contrib.sites.models import get_current_site
 from django.http import Http404, HttpResponse
+from django.contrib.auth import authenticate
+from django.utils.translation import ugettext as _
 
 from guardian.shortcuts import get_objects_for_user
 
@@ -12,13 +13,14 @@ from geonode.documents.views import _resolve_document, document_detail
 from geonode.maps.views import _resolve_map, map_detail
 from geonode.base.models import ResourceBase
 from geonode.layers.models import Layer
+from geonode.geoserver.helpers import ogc_server_settings
+
 
 from .models import SiteResources
 from .utils import resources_for_site
 
 _PERMISSION_MSG_VIEW = ('You don\'t have permissions to view this document')
 
-# Create your views here.
 
 def site_layer_detail(request, layername, template='layers/layer_detail.html'):
 
@@ -33,9 +35,9 @@ def site_layer_detail(request, layername, template='layers/layer_detail.html'):
         raise Http404
     else:
         return layer_detail(request, layername, template='layers/layer_detail.html')
-    
 
-def site_document_detail(request):
+
+def site_document_detail(request, docid):
     # BETTER WAY INSTEAD OF DO TWO _RESOLVE_DOCUMENT PER CALL?
     document = _resolve_document(
         request,
@@ -49,7 +51,7 @@ def site_document_detail(request):
         return document_detail(request, docid, template='documents/document_detail.html')
 
 
-def site_map_detail(request):
+def site_map_detail(request, mapid):
     # BETTER WAY INSTEAD OF DO TWO _RESOLVE_MAP PER CALL?
     the_map = _resolve_map(
         request,
@@ -60,7 +62,7 @@ def site_map_detail(request):
     if not SiteResources.objects.get(site=site).resources.filter(pk=the_map.pk).exists():
         raise Http404
     else:
-        return map_detail(request, layername, template='maps/map_detail.html')
+        return map_detail(request, mapid, template='maps/map_detail.html')
 
 
 def layer_acls(request):
