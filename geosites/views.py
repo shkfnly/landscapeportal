@@ -73,7 +73,6 @@ def layer_acls(request):
     # user which represents the geoserver administrator that
     # is not present in django.
     acl_user = request.user
-    site = get_current_site(request)
     if 'HTTP_AUTHORIZATION' in request.META:
         try:
             username, password = _get_basic_auth_info(request)
