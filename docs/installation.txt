@@ -57,7 +57,7 @@ How to create slave sites
 
 From the master site’s admin panel it’s possible to add the new site at http://localhost:8000/admin/sites/site/add/. The “master” site has the ID = 1 and every subsequent site will have the ID increased by 1.
 
-In the landscapeportal folder there is a template folder for slave sites named “site1”, it is possible to copy that folder for every slave site changing the name and the SITE_ID and the SITE_NAME to match the id and Display Name of the site created in the admin.
+In the landscapeportal folder there is a template folder for slave sites named “site2”, copy that folder for every slave site and change the name, the SITE_ID and the SITE_NAME to match the ID and Display Name of the site created in the admin.
 
 To start the new site run another instance of the Django development server pointing to the correct settings and binding it to another port with:
 $ python manage.py runserver 8001 --settings=landscapeportal.siteXXXX.settings

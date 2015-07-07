@@ -17,8 +17,7 @@ How the Geosites work
 
 At the base of the Landscape GeoPortal there is the GeoNode GeoSites contrib app that makes full use of the Django Site framework to separate the content between sites.
 The Association of a resource to a site is done through a OneToMany table named “SiteResources”, the table has two fields:
-site, is a one to one relation with the Django Site
-resources is a many to many relation to the GeoNode ResourceBase model
+site, is a one to one relation with the Django Site and resources that is a many to many relation to the GeoNode ResourceBase model.
 
 So there is one “SiteResources” entry for each site.
 This table is used by GeoSites to filter the resources per site. GeoSites, in fact, overrides all the GeoNode data related enpoints like APIs, detail page, faceting facilities etc.
