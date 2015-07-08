@@ -5,7 +5,7 @@
 ###############################################
 
 import os
-import geosites
+from geonode.contrib import geosites
 
 # Directory of master site
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)

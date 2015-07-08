@@ -2,7 +2,7 @@
 # Settings to apply to all GeoSites
 
 import os
-import geosites
+from geonode.contrib import geosites
 
 # Start with GeoSites pre_settings
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)
