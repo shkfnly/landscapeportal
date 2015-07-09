@@ -3,6 +3,7 @@
 ###############################################
 # Geosite local settings
 ###############################################
+import os
 
 # Outside URL
 SITEURL = 'http://site2.lpgeo'
@@ -16,4 +17,3 @@ SITE_DATABASES = {
     },
 }
 """
-

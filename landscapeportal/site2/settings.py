@@ -47,4 +47,4 @@ SITE_DATABASES = {}
 
 
 # Read in GeoSites post_settings
-execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))
+execfile(os.path.join(SITE_ROOT, '../', 'post_settings.py'))
