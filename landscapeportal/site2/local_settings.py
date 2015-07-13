@@ -6,7 +6,7 @@
 import os
 
 # Outside URL
-SITEURL = 'http://site2.lpgeo'
+SITEURL = 'http://dev2.landscapesportal.org'
 
 # databases unique to site if not defined in site settings
 """
