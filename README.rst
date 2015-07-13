@@ -22,11 +22,19 @@ Install geonode with::
 
     $ sudo apt-get install geonode
 
+    $ geonode createsuperuser
+
 Clone and install the Landscapeportal app with::
 
     $ git clone https://github.com/terranodo/landscapeportal
 
     $ pip install -e landscapeportal
+
+    $ cd landscapeportal
+
+    $ python manage.py syncdb
+
+    $ python manage.py loaddata landscapeportal/sites.json
 
 
 Usage
@@ -46,6 +54,10 @@ Deploy with apache/nginx+gunicorn
 
 DEVELOPMENT
 
+A good setup could be to have geonode and landscapeportal at the same level in the virtualenv folder so that geoserver can run from the geonode folder with::
+
+    $ paver start_geoserver
+
 In development mode it is possible to run multiple sites by binding the django development server on different ports.
 To run a site go in it's directory and run the server with::
   
@@ -58,3 +70,8 @@ For the master site it's enough to run::
 In order to have the sites to share the same SqlLite database uncomment the content of each SITE_DATABASES directive in the settings.py files.
 
 Every site will be available at the port specified with the runserver command.
+
+CUSTOMIZE THE LOOK AND FEEL
+
+This app overrides several parts of GeoNode, the override technique is uses for templates as well.
+In order to customize a template, like the blog app, it is enough to reproduse the same template folder structure of the zinnia blog app and write a template with the same name. The templates defined in this app will be used in place of the original ones provided by GeoNode or any third party app.
