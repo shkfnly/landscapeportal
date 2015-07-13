@@ -15,7 +15,7 @@
 
 server {
     listen 80;
-    server_name site2.lpgeo;
+    server_name site2.* dev2.*;
 
     client_max_body_size 1G;
     send_timeout 120;
