@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url, include
-from geonode.contrib.geosites.urls import urlpatterns
+from geonode.contrib.geosites.urls import urlpatterns, handler403
 
 urlpatterns = urlpatterns + patterns('',
     url(r'^weblog/', include('zinnia.urls', namespace='zinnia')),
