@@ -11,8 +11,12 @@ from geonode.contrib import geosites
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
-# Read in GeoSites pre_settings
-execfile(os.path.join(SITE_ROOT, '../', 'pre_settings.py'))
+try:
+    # read in project pre_settings
+    execfile(os.path.join(SITE_ROOT, 'pre_settings.py'))
+except:
+    # if not available, read in GeoSites pre_settings
+    execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
 
 SITE_ID = 2
 SITE_NAME = 'site2'
@@ -42,9 +46,12 @@ SITE_DATABASES = {}
 
 # These are some production settings that should be changed here or in local_settings
 #SITEURL = 'http://geonode.org'
-#OGC_SERVER['default']['LOCATION'] = os.path.join(SITEURL, 'geoserver/')
-#OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join(SITEURL, 'geoserver/')
 
 
-# Read in GeoSites post_settings
-execfile(os.path.join(SITE_ROOT, '../', 'post_settings.py'))
+# read in GeoSites post_settings
+try:
+    # read in project pre_settings
+    execfile(os.path.join(SITE_ROOT, 'post_settings.py'))
+except:
+    # if not available, read in GeoSites pre_settings
+    execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))

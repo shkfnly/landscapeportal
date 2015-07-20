@@ -3,11 +3,7 @@ import os
 
 from geonode.contrib import geosites
 
-OGC_SERVER['default']['LOCATION'] = os.path.join(SITEURL, 'geoserver/')
-OGC_SERVER['default']['PUBLIC_LOCATION'] = os.path.join(SITEURL, 'geoserver/')
-CATALOGUE['default']['URL'] = '%scatalogue/csw' % SITEURL
-PYCSW['CONFIGURATION']['metadata:main']['provider_url'] = SITEURL
-LOCAL_GEOSERVER['source']['url'] = OGC_SERVER['default']['PUBLIC_LOCATION'] + 'wms'
+GEOSERVER_URL = 'http://geoserver.landscapesportal.org:8080/geoserver/'
 
 # use GeoSites post_settings
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)

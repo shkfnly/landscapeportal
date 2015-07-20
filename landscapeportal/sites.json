@@ -1,18 +1,26 @@
 [
 {
-    "pk": 1, 
-    "model": "sites.site", 
-    "fields": {
-        "domain": "master.lpgeo", 
-        "name": "Master"
-    }
-},
-{
     "pk": 2, 
     "model": "sites.site", 
     "fields": {
-        "domain": "site2.lpgeo", 
+        "domain": "dev2.landscapesportal.org", 
         "name": "site2"
+    }
+},
+{
+    "pk": 3, 
+    "model": "sites.site", 
+    "fields": {
+        "domain": "dev3.landscapesportal.org", 
+        "name": "site3"
+    }
+},
+{
+    "pk": 1, 
+    "model": "sites.site", 
+    "fields": {
+        "domain": "dev.landscapesportal.org", 
+        "name": "Master"
     }
 }
 ]

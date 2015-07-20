@@ -23,3 +23,5 @@ INSTALLED_APPS = INSTALLED_APPS + (
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
 	'zinnia.context_processors.version',
 )
+
+THEME_ACCOUNT_CONTACT_EMAIL = 'admin.lsp@cgiar.org'

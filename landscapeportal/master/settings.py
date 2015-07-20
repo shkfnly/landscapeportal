@@ -11,8 +11,13 @@ from geonode.contrib import geosites
 GEOSITES_ROOT = os.path.dirname(geosites.__file__)
 SITE_ROOT = os.path.dirname(__file__)
 
-# Read in GeoSites pre_settings
-execfile(os.path.join(SITE_ROOT, '../', 'pre_settings.py'))
+try:
+    # read in project pre_settings
+    execfile(os.path.join(SITE_ROOT, 'pre_settings.py'))
+except:
+    # if not available, read in GeoSites pre_settings
+    execfile(os.path.join(GEOSITES_ROOT, 'pre_settings.py'))
+
 
 SITE_ID = 1
 SITE_NAME = 'Master'
@@ -37,6 +42,10 @@ SITE_DATABASES = {}
 # Allow users to register
 #REGISTRATION_OPEN = True
 
-
 # Read in GeoSites post_settings
-execfile(os.path.join(SITE_ROOT, '../', 'post_settings.py'))
+try:
+    # read in project pre_settings
+    execfile(os.path.join(SITE_ROOT, 'post_settings.py'))
+except:
+    # if not available, read in GeoSites pre_settings
+    execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))
