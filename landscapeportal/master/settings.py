@@ -44,8 +44,8 @@ SITE_DATABASES = {}
 
 # Read in GeoSites post_settings
 try:
-    # read in project pre_settings
+    # read in project post_settings
     execfile(os.path.join(SITE_ROOT, '../', 'post_settings.py'))
 except:
-    # if not available, read in GeoSites pre_settings
+    # if not available, read in GeoSites post_settings
     execfile(os.path.join(GEOSITES_ROOT, 'post_settings.py'))
